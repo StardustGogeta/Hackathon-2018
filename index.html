@@ -287,17 +287,11 @@
         function changeEvent(newEvent) {
             currentEvent = newEvent;
             $("#event-text").text(currentEvent);
+            getAllMessages();
         }
         
         function logIn() {
             getUserData(successfulLogIn, logIn);    
-        }
-        
-        function getAnnouncements() {
-            $.post("index.html", {"type": "getAnnouncements", "event": currentEvent}, function(data){
-                announcementList = data;
-                announcementRefresh();
-            });
         }
         
         function announcementRefresh() {
