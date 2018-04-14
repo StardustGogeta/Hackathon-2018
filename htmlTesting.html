@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id='chat-box' style='display: flex; flex-direction: column; height: 500px'>
-        <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; background-color: antiquewhite'>
+        <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; background-color: antiquewhite; overflow-y:scroll;'>
             
         </div>
         <div id='chat-box-message' style='display: flex; flex-direction: row; flex-grow: 1'>
@@ -55,11 +55,11 @@
             console.log(messageList);
             for(i = 0; i < messageList.length; i++) {
                 nextMessage = $("<div>");
-                profileImg = $("<img>").attr({
-                    "href": messageList[i].profileImg;
-                    "height": "50px";
+                nextMessage.append($("<img>").attr({
+                    "src": messageList[i].profileImg,
+                    "height": "50px",
                     "width": "50px"
-                });
+                }));
                 nextMessage.append($("<p>").text(messageList[i].text))
                 $("#chat-box-log").append(nextMessage);
                 console.log(messageList[i]);
