@@ -75,14 +75,74 @@
             resize: none;
         }
     </style>
+    <script>
+        document.addEventListener('keydown', function(e) { // Key controls
+        switch (e.key) {
+            case 'Enter':
+                sendMessage();
+                break;
+        }
+        });
+        $(window).on('load',function(){
+            $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
+        });
+        
+        var modalStyle = 0;
+        function changeModal() {
+            modalStyle ^= 1;
+            $(".modal-title").text(["Log In", "Sign Up"][modalStyle]);
+            $(".modal-header span h5 a").text(["Log In", "Sign Up"][modalStyle^1]);
+            if (modalStyle) {
+                $(".modal-body").append($("#pic"));
+            }
+            else {
+                $("#holder").append($("#pic"));
+            }
+            $("#type").attr("val", modalStyle);
+        }
+    </script>
 </head>
 <body>
+    <!-- Ignore this -->
+    <div style="display:none;" id="holder">
+        <div id="pic" class='form-group'>
+            <label for='profileImg'>Profile Image URL</label>
+            <input name="profileImg" type="url" id="profileImg" class='form-control form-control-lg' required>
+        </div>
+    </div>
+    <!-- Ignore the above -->
     <div id="toolbar">
         <button id="event-button">=</button>
         <h1 id="title-text">EHost Planner:</h1>
         <h1 id="event-text">Hackathon</h1>
         <button id="settings-button">Stuff</button>
     </div>
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span><h3 style="display: inline;" class="modal-title">Log In</h3><h5 style="display: inline;"> or <a href="#" onclick="changeModal()">Sign Up</a></h5></span>
+          </div>
+        <form method="post">
+          <div class="modal-body">
+              <div class='form-group'>
+                <label for='username'>Username</label>
+                <input name="username" type="text" id="username" class='form-control form-control-lg' required>
+              </div>
+              <div class='form-group'>
+                <label for='password'>Password</label>
+                <input name="password" type="password" id="password" class='form-control form-control-lg' required>
+              </div>
+              <input val="0" name="type" type="hidden" id="type" class='form-control form-control-lg' required>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class='btn btn-primary'>
+          </div>
+        </form>
+
+        </div>
+  </div>
+  </div>
     <div class="container-fluid">
         <div class="row">
             <div id="body">
