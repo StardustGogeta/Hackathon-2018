@@ -371,7 +371,7 @@
                     password = $("#password")[0].value;
                     
                     $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
-                        setInterval(getAllMessages, 100);
+                        setInterval(getAllMessages, 1000);
                         events = userData.events;
                         if(events.length > 0) {
                             currentEvent = events[0];
@@ -386,7 +386,7 @@
                 password = $("#password")[0].value;
                 
                 $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
-                    setInterval(getAllMessages, 100);
+                    setInterval(getAllMessages, 1000);
                     events = userData.events;
                     if(events.length > 0) {
                         currentEvent = events[0];
