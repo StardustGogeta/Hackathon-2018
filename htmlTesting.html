@@ -1,0 +1,65 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $.post("index.html", {"type": "getUserData", "username": 'test', "password": "test"}, function(data){
+            console.log(data);
+        });
+        $.post("index.html", {"type": "getUserData", "username": "test", "password": "wrong"}, function(data){
+            console.log(data);
+        });
+    </script>
+</head>
+<body>
+    <div id='chat-box' style='display: flex; flex-direction: column; height: 500px'>
+        <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; background-color: antiquewhite'>
+            
+        </div>
+        <div id='chat-box-message' style='display: flex; flex-direction: row; flex-grow: 1'>
+            <button id='send-button' style="flex: 1; flex-grow: 1" onclick="sendMessage();">
+                Send
+            </button>
+            <input id="chat-box-message-text" type="text" style="flex: 2; flex-grow: 5">
+        </div>
+    </div>
+    <script>
+        chatBoxLog = document.getElementById('chat-box-log');
+        chatBoxMessage = document.getElementById('chat-box-log');
+        
+        function sendMessage() {
+            inputBox = document.getElementById('chat-box-message-text');
+            $.post("index.html", {"type": "sendMessage", "username": 'test', "password": "test", "message": inputBox.value}, function(data){
+                console.log(data);
+            });
+        }
+        
+        messageList = [];
+        function getAllMessages() {
+            $.post("index.html", {"type": "getAllMessages", "event": "test"}, function(data){
+                messageList = data;
+                setInterval(getMessage(), 100);
+            });
+        }
+        
+        function getMessage() {
+            $.post("index.html", {"type": "getAllMessages", "event": "test"}, function(data){
+                messageList = data;
+                chatBoxRefresh();
+            });
+        }
+        
+        function chatBoxRefresh() {
+            $("#chat-box-log *").remove();
+            for(i = 0; i < messageList.length; i++) {
+                nextMessage = $("<div>").text(messageList[i]);
+                $("#chat-box-log").append();
+            }
+        }
+        
+        //Main Functions
+        getAllMessages();
+        
+        
+        
+        
+    </script>
+</body>
