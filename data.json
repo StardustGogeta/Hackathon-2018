@@ -1,0 +1,11 @@
+{
+    "users": {
+        "test": {
+            "password": "test",
+            "events": ["hackathon"]
+            }
+        },
+    "events": [
+        "hackathon"
+        ]
+}
