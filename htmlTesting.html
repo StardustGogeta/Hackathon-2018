@@ -13,7 +13,16 @@
         });
         $(window).on('load',function(){
             $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
+            $("#pic").hide();
         });
+        
+        var modalStyle = 0;
+        function changeModal() {
+            modalStyle ^= 1;
+            $(".modal-title").text(["Log In", "Sign Up"][modalStyle]);
+            if (modalStyle) $("#pic").show(); else $("#pic").hide();
+            $("#type").attr("val", modalStyle);
+        }
     </script>
 </head>
 <body>
@@ -34,7 +43,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Log In</h4>
+            <span><h3 style="display: inline;" class="modal-title">Log In</h3><h5 style="display: inline;"> or <a href="#" onclick="changeModal()">sign up</a></h5></span>
           </div>
         <form method="post">
           <div class="modal-body">
@@ -46,6 +55,11 @@
                 <label for='password'>Password</label>
                 <input name="password" type="password" id="password" class='form-control form-control-lg' required>
               </div>
+              <div id="pic" class='form-group'>
+                <label for='profileImg'>Profile Image URL</label>
+                <input name="profileImg" type="url" id="profileImg" class='form-control form-control-lg' required>
+              </div>
+              <input val="0" name="type" type="hidden" id="type" class='form-control form-control-lg' required>
           </div>
           <div class="modal-footer">
             <input type="submit" class='btn btn-primary'>
