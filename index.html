@@ -248,7 +248,6 @@
             $.post("index.html", {"type": "getAllMessages", "event": currentEvent}, function(data){
                 messageList = data;
                 chatBoxRefresh();
-                setInterval(getMessage(), 100);
             });
         }
         
@@ -365,8 +364,7 @@
                     password = $("#password")[0].value;
                     
                     $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
-                        setInterval(getAnnouncements(), 100);
-                        getAllMessages();
+                        setInterval(getAllMessages(), 100);
                         events = userData.events;
                         if(events.length > 0) {
                             currentEvent = events[0];
@@ -376,18 +374,17 @@
                 else {$('#fail').show();}
             });
             else $.post('index.html', {"type": "signup", "username": $("#username")[0].value, "password":$("#password")[0].value, "profileImg": $("#profileImg")[0].value}, function(data) {
-                if (data.result) {
-                    $('#myModal').modal('hide');
-                    username = $("#username")[0].value;
-                    password = $("#password")[0].value;
-                    setInterval(getAnnouncements(), 100);
-                    getAllMessages();
-                    events = data.events;
-                    if(events.length>0){
-                    currentEvent = events[0];
+                $('#myModal').modal('hide');
+                username = $("#username")[0].value;
+                password = $("#password")[0].value;
+                
+                $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
+                    setInterval(getAllMessages(), 100);
+                    events = userData.events;
+                    if(events.length > 0) {
+                        currentEvent = events[0];
                     } else {currentEvent = '';}
-                }
-                else {$('#fail').show();}
+                });
             });
         };  
         
