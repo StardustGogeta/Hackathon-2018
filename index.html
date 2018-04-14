@@ -167,11 +167,11 @@
     </div>
     <!-- Ignore the above -->
     <div id="toolbar">
-        <button id="event-button">=</button>
+        <!--button id="event-button">=</button-->
         <h1 id="title-text">EHost Planner:</h1>
         <h1 id="event-text">Hackathon</h1>
-        <button id="settings-button">S</button>
-        <button id="add-member-button">@</button>
+        <!--button id="settings-button">S</button-->
+        <!--button id="add-member-button">@</button-->
         <button id="create-event-button" onclick="addNewEvent();">+</button>
     </div>
     <div class="modal fade" id="myModal">
@@ -217,8 +217,8 @@
                     </div>
                 </div>
                 <div id="announcements">
-                    <button id="can-go-button">I can go!</button>
-                    <button id="cant-go-button">I can't go.</button>
+                    <button id="can-go-button" onclick="document.getElementById('can-go-button').style.backgroundColor = #228B22;">I can go!</button>
+                    <button id="cant-go-button" onclick="document.getElementById('cant-go-button').style.backgroundColor = #228B22;">I can't go.</button>
                 </div>
             </div>
         </div>
