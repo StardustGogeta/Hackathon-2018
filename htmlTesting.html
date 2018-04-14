@@ -34,14 +34,14 @@
         
         messageList = [];
         function getAllMessages() {
-            $.post("index.html", {"type": "getAllMessages", "event": "test"}, function(data){
+            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
                 messageList = data;
                 setInterval(getMessage(), 100);
             });
         }
         
         function getMessage() {
-            $.post("index.html", {"type": "getAllMessages", "event": "test"}, function(data){
+            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
                 messageList = data;
                 chatBoxRefresh();
             });
@@ -49,15 +49,23 @@
         
         function chatBoxRefresh() {
             $("#chat-box-log *").remove();
+            console.log(messageList);
             for(i = 0; i < messageList.length; i++) {
+<<<<<<< HEAD
                 nextMessage = $("<div>");
                 nextMessage.append($("<p>").text(messageList[i].text))
                 $("#chat-box-log").append(nextMessage);
+=======
+                console.log(messageList[i]);
+                nextMessage = $("<div>").text(messageList[i]);
+                $("#chat-box-log").append();
+>>>>>>> 2827bcec583a1f7a4f024395d9e35294a604196d
             }
         }
         
         //Main Functions
         getAllMessages();
+        chatBoxRefresh();
         
         
         
