@@ -29,6 +29,11 @@ app.post("/index.html", function(req, res) {
     else if (b.type == "login") {
         if (data.users[b.username] && data.users[b.username].password == b.password) returnData = {"result": true};
     }
+    else if (b.type == "signup") {
+        if (!data.users[b.username]) {
+            data.users[b.username] = {"password": b.password, "events": [], "profileImg": b.profileImg};
+        }
+    }
     res.send(returnData);
 });
 
