@@ -144,7 +144,7 @@
         <h1 id="event-text">Hackathon</h1>
         <button id="settings-button">S</button>
         <button id="add-member-button">@</button>
-        <button id="create-event-button">+</button>
+        <button id="create-event-button" onclick="addNewEvent();">+</button>
     </div>
     <div class="modal fade" id="myModal">
       <div class="modal-dialog">
@@ -359,7 +359,12 @@
             });
         };  
         
-        
+        function addNewEvent() {
+            eventName = prompt("What would you like to name your new event?");
+            $.post("index.html", {"type": "addEvent", "event": eventName, "username": username}, function() {
+                changeEvent(eventName);
+            });
+        }
         
         
     </script>
