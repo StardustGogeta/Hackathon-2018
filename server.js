@@ -30,6 +30,11 @@ app.post("/index.html", function(req, res) {
             jsonfile.writeFileSync("data.json", data);
         }
     }
+    else if (b.type == "getUsers") {
+        arr = [];
+        for (user in data.users) arr.push(user.profileImg);
+        returnData = {"imgs": arr};
+    }
     else if (b.type == "getAllMessages") {
         if (data.events[b.event]) returnData = data.events[b.event].msgHistory;
     }
