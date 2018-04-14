@@ -205,11 +205,11 @@
         <div class="row">
             <div id="body">
                 <div id="user-list">hi</div>
-                <div id='chat-box' style='display: flex; flex-direction: column'>
-                    <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; overflow-y:scroll;'>
+                <div id='chat-box' style='display: flex; flex-direction: column-reverse'>
+                    <div id='chat-box-log' style='display: flex; flex-direction: column; overflow-y:scroll;'>
             
                     </div>
-                    <div id='chat-box-message' style='display: flex; flex-direction: row; flex-grow: 1'>
+                    <div id='chat-box-message' style='display: flex; flex-direction: row'>
                         <button id='send-button' style="flex: 1; flex-grow: 1" onclick="sendMessage();">
                             Send
                         </button>
@@ -299,22 +299,22 @@
         function logIn() {
             getUserData(successfulLogIn, logIn);    
         }
-        
-        function announcementRefresh() {
-            $("#announcements").remove();
-            console.log(announcementList);
-            for(i = 0; i < announcementList.length; i++) {
+        userList = [];
+        function usersRefresh() {
+            $("#user-list *").remove();
+            console.log(userList);
+            for(i = 0; i < userList.length; i++) {
                 tempColor = "#42AB42";
                 if(i%2==0) {tempColor = "#36A536";} else {tempColor = "#42AB42";}
                 nextAnn = $("<div>").attr({
                     "background-color": tempColor
                 });
                 nextAnn.append($("<img>").attr({
-                    "src": announcementList[i].profileImg,
+                    "src": userList[i].profileImg,
                     "height": "50px",
                     "width": "50px"
                 }));
-                nextAnn.append($("<p>").text(announcementList[i].text))
+                nextAnn.append($("<p>").text(userList[i].text))
                 $("#chat-box-log").append(nextAnn);
                 console.log(announcementList[i]);
             }
