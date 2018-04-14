@@ -33,7 +33,11 @@
             $("#announcements").remove();
             console.log(announcementList);
             for(i = 0; i < announcementList.length; i++) {
-                nextAnn = $("<div>");
+                tempColor = "#42AB42";
+                if(i%2==0) {tempColor = "#36A536";} else {tempColor = "#42AB42";}
+                nextAnn = $("<div>").attr({
+                    "background-color": tempColor
+                });
                 nextAnn.append($("<img>").attr({
                     "src": announcementList[i].profileImg,
                     "height": "50px",
