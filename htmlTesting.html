@@ -27,8 +27,10 @@
         
         function sendMessage() {
             inputBox = document.getElementById('chat-box-message-text');
-            $.post("index.html", {"type": "sendMessage", "username": 'test', "password": "test", "message": inputBox.value}, function(data){
+            $.post("index.html", {"type": "sendMessage", "username": 'test', "event": "hackathon", "message": inputBox.value}, function(data){
                 console.log(data);
+                getAllMessages();
+                chatBoxRefresh();
             });
         }
         
@@ -51,15 +53,9 @@
             $("#chat-box-log *").remove();
             console.log(messageList);
             for(i = 0; i < messageList.length; i++) {
-<<<<<<< HEAD
                 nextMessage = $("<div>");
                 nextMessage.append($("<p>").text(messageList[i].text))
                 $("#chat-box-log").append(nextMessage);
-=======
-                console.log(messageList[i]);
-                nextMessage = $("<div>").text(messageList[i]);
-                $("#chat-box-log").append();
->>>>>>> 2827bcec583a1f7a4f024395d9e35294a604196d
             }
         }
         
