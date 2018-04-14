@@ -14,7 +14,9 @@
                 {"text": "brown", "user": "Liam"},
                 {"text": "fox", "user": "Liam"},
                 {"text": "jumped", "user": "Liam"}
-                ]
+                ],
+            "going": ["test"],
+            "notGoing": ["Liam"]
             }
         }
 }
