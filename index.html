@@ -42,6 +42,11 @@
             flex-grow: 3;
             background-color: antiquewhite;
         }
+        #chat-box-message-text {
+            word-wrap: break-word;
+            word-break: break-all;
+            resize: none;
+        }
     </style>
 </head>
 <body>
@@ -52,9 +57,72 @@
         <div class="row">
             <div id="body">
                 <div id="user-list">hi</div>
-                <div id="chat-box">hi</div>
+                <div id='chat-box' style='display: flex; flex-direction: column'>
+                    <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; background-color: antiquewhite; overflow-y:scroll;'>
+            
+                    </div>
+                    <div id='chat-box-message' style='display: flex; flex-direction: row; flex-grow: 1'>
+                        <button id='send-button' style="flex: 1; flex-grow: 1" onclick="sendMessage();">
+                            Send
+                        </button>
+                        <textarea id="chat-box-message-text" type="text" style="flex: 2; flex-grow: 5"></textarea>
+                    </div>
+                </div>
                 <div id="announcements">hi</div>
             </div>
         </div>
-    </div>    
+    </div>
+    <script>
+        chatBoxLog = document.getElementById('chat-box-log');
+        chatBoxMessage = document.getElementById('chat-box-log');
+        
+        function sendMessage() {
+            inputBox = document.getElementById('chat-box-message-text');
+            $.post("index.html", {"type": "sendMessage", "username": 'test', "event": "hackathon", "message": inputBox.value}, function(data){
+                console.log(data);
+                getAllMessages();
+                chatBoxRefresh();
+            });
+            inputBox.value = "";
+        }
+        
+        messageList = [];
+        function getAllMessages() {
+            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
+                messageList = data;
+                chatBoxRefresh();
+                setInterval(getMessage(), 100);
+            });
+        }
+        
+        function getMessage() {
+            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
+                messageList = data;
+                chatBoxRefresh();
+            });
+        }
+        
+        function chatBoxRefresh() {
+            $("#chat-box-log *").remove();
+            console.log(messageList);
+            for(i = 0; i < messageList.length; i++) {
+                nextMessage = $("<div>");
+                nextMessage.append($("<img>").attr({
+                    "src": messageList[i].profileImg,
+                    "height": "50px",
+                    "width": "50px"
+                }));
+                nextMessage.append($("<p>").text(messageList[i].text))
+                $("#chat-box-log").append(nextMessage);
+                console.log(messageList[i]);
+            }
+        }
+        
+        //Main Functions
+        getAllMessages();
+        
+        
+        
+        
+    </script>
 </body>
