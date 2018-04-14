@@ -1,13 +1,8 @@
+<!DOCTYPE html>
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-        $.post("index.html", {"type": "getUserData", "username": 'test', "password": "test"}, function(data){
-            console.log(data);
-        });
-        $.post("index.html", {"type": "getUserData", "username": "test", "password": "wrong"}, function(data){
-            console.log(data);
-        });
-    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id='chat-box' style='display: flex; flex-direction: column; height: 500px'>
@@ -20,7 +15,32 @@
             </button>
             <input id="chat-box-message-text" type="text" style="flex: 2; flex-grow: 5">
         </div>
-    </div>
+    </div><br>
+    <button class="col-3 mr-2 btn btn-lg btn-dark" data-toggle="modal" data-target="#myModal">Log In</button>
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Log In</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        <form method="post">
+          <div class="modal-body">
+              <div class='form-group'>
+                <label for='email'>New Email Address</label>
+                <input name="email" type="email" id="email" class='form-control form-control-lg' required>
+                <small class="form-text text-muted">This email address will be sent important messages regarding your account.</small>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class='btn btn-primary'>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+
+        </div>
+  </div>
+  </div>
     <script>
         chatBoxLog = document.getElementById('chat-box-log');
         chatBoxMessage = document.getElementById('chat-box-log');
