@@ -1,10 +1,13 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-        $.post("index.html", {"type": "getUserData", "username": 'test', password: "test"}, function(data){
+        $.post("index.html", {"type": "getUserData", "username": 'test', "password": "test"}, function(data){
             console.log(data);
         });
-        $.post("index.html", {"type": "sendMessage", "username": 'test', password: "test", message: "test"}, function(data){
+        $.post("index.html", {"type": "getUserData", "username": "test", "password": "wrong"}, function(data){
+            console.log(data);
+        });
+        $.post("index.html", {"type": "sendMessage", "username": 'test', "password": "test", "message": "test"}, function(data){
             console.log(data);
         })
     </script>
