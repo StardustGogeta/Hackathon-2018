@@ -132,11 +132,11 @@
         }
         
         #can-go-button:hover {
-            background-color: #127B12;
+            background-color: #228B22;
         }
         
         #cant-go-button:hover {
-            background-color: #127B12;
+            background-color: #228B22;
         }
         
         #chat-box-message-text {
@@ -293,17 +293,11 @@
         function changeEvent(newEvent) {
             currentEvent = newEvent;
             $("#event-text").text(currentEvent);
+            getAllMessages();
         }
         
         function logIn() {
             getUserData(successfulLogIn, logIn);    
-        }
-        
-        function getAnnouncements() {
-            $.post("index.html", {"type": "getAnnouncements", "event": currentEvent}, function(data){
-                announcementList = data;
-                announcementRefresh();
-            });
         }
         
         function announcementRefresh() {
