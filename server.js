@@ -23,6 +23,13 @@ app.post("/index.html", function(req, res) {
             jsonfile.writeFileSync("data.json", data);
         }
     }
+    else if (b.type == "addEvent") {
+        if (!data.events[b.event]) {
+            data.users[b.username].events.push("b.event");
+            data.events[b.event] = {"msgHistory": [], "going": [], "notGoing": []};
+            jsonfile.writeFileSync("data.json", data);
+        }
+    }
     else if (b.type == "getAllMessages") {
         if (data.events[b.event]) returnData = data.events[b.event].msgHistory;
     }
