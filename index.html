@@ -94,6 +94,7 @@
         });
         $(window).on('load',function(){
             $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
+            $('#fail').hide();
         });
         
         var modalStyle = 0;
@@ -109,6 +110,13 @@
             }
             $("#type").attr("val", modalStyle);
         }
+        
+        function submitForm() {
+            $.post('index.html', {"type": "login", "username": $("#username")[0].value, "password":$("#password")[0].value}, function(data) {
+                if (data.result) $('#myModal').modal('hide');
+                else {console.log("f"); $('#fail').show();}
+            });
+        }; 
     </script>
 </head>
 <body>
@@ -132,8 +140,11 @@
           <div class="modal-header">
             <span><h3 style="display: inline;" class="modal-title">Log In</h3><h5 style="display: inline;"> or <a href="#" onclick="changeModal()">Sign Up</a></h5></span>
           </div>
-        <form method="post">
           <div class="modal-body">
+              <div id="fail" class="alert alert-danger m-3 alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>The username and password do not match an existing account.</strong>
+              </div>
               <div class='form-group'>
                 <label for='username'>Username</label>
                 <input name="username" type="text" id="username" class='form-control form-control-lg' required>
@@ -145,9 +156,8 @@
               <input val="0" name="type" type="hidden" id="type" class='form-control form-control-lg' required>
           </div>
           <div class="modal-footer">
-            <input type="submit" class='btn btn-primary'>
+            <button class="btn btn-primary" onclick="submitForm()">Submit</button>
           </div>
-        </form>
 
         </div>
   </div>

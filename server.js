@@ -26,6 +26,9 @@ app.post("/index.html", function(req, res) {
     else if (b.type == "getAllMessages") {
         if (data.events[b.event]) returnData = data.events[b.event].msgHistory;
     }
+    else if (b.type == "login") {
+        if (data.users[b.username] && data.users[b.username].password == b.password) returnData = {"result": true};
+    }
     res.send(returnData);
 });
 
