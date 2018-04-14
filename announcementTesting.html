@@ -49,6 +49,15 @@
             }
         }
         
-        setInterval(getAnnouncements(), 100)
+        setInterval(getAnnouncements(), 100);
+        
+        $.post("index.html", {"type": "createEvent", "event": eventName}, function(data){
+                changeEvent(eventName);
+        });
+        
+        $.post("index.html", {"type": "addPerson", "event": currentEvent, "person": username}, function(data){
+                
+        });
+        
     </script>
 </body>
