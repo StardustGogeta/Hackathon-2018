@@ -10,8 +10,19 @@
     </script>
 </head>
 <body>
-    <div id='chat-box'>
-        
+    <div id='chat-box' style='display: flex; flex-direction: column; height: 500px'>
+        <div id='chat-box-log' style='display: flex; flex-direction: column; flex-grow: 10; background-color: antiquewhite'>
+            test
+        </div>
+        <div id='chat-box-message' style='display: flex; flex-direction: row; flex-grow: 1'>
+            <button id='send-button' style="flex: 1; flex-grow: 1">
+                Send
+            </button>
+            <input type="text" style="flex: 2; flex-grow: 5">
+        </div>
     </div>
-
+    <script>
+        chatBoxLog = document.getElementById('chat-box-log');
+        chatBoxMessage = document.getElementById('chat-box-log');
+    </script>
 </body>
