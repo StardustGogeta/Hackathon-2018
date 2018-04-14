@@ -18,7 +18,11 @@ app.post("/index.html", function(req, res) {
         else returnData = {"error": "Sent invalid user credential pairing"};
     }
     else if (b.type == "sendMessage") {
-        if (data.events[b.event]) data.events[b.event].msgHistory.push({"text": b.message, "user": b.username});
+        if (data.events[b.event]) {
+            data.events[b.event].msgHistory.push({"text": b.message, "user": b.username});
+            console.log("new", data);
+            jsonfile.writeFileSync("data.json", data);
+        }
     }
     else if (b.type == "getAllMessages") {
         if (data.events[b.event]) returnData = data.events[b.event].msgHistory;
