@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        
+    </script>
+    <style>
+        #announcements {
+            flex-grow: 3;
+            background-color: #B4C2B8;
+        }
+    </style>
+</head>
+<body>
+    <div id="announcements">
+    
+    </div>
+    <script>
+        currentEvent = 'hackathon';
+        
+        function getAnnouncements() {
+            $.post("index.html", {"type": "getAnnouncements", "event": currentEvent}, function(data){
+                announcementList = data;
+                announcementRefresh();
+            });
+        }
+        
+        announcementList = [];
+        
+        function announcementRefresh() {
+            $("#announcements").remove();
+            console.log(announcementList);
+            for(i = 0; i < announcementList.length; i++) {
+                nextAnn = $("<div>");
+                nextAnn.append($("<img>").attr({
+                    "src": announcementList[i].profileImg,
+                    "height": "50px",
+                    "width": "50px"
+                }));
+                nextAnn.append($("<p>").text(announcementList[i].text))
+                $("#chat-box-log").append(nextAnn);
+                console.log(announcementList[i]);
+            }
+        }
+        
+        setInterval(getAnnouncements(), 100)
+    </script>
+</body>
