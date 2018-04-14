@@ -5,7 +5,15 @@
             "events": ["hackathon"]
             }
         },
-    "events": [
-        "hackathon"
-        ]
+    "events": {
+        "hackathon": {
+            "msgHistory": [
+                {"text": "The", "user": "Liam"},
+                {"text": "quick", "user": "Liam"},
+                {"text": "brown", "user": "Liam"},
+                {"text": "fox", "user": "Liam"},
+                {"text": "jumped", "user": "Liam"}
+                ]
+            }
+        }
 }
