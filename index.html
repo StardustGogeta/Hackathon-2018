@@ -262,7 +262,13 @@
             $("#chat-box-log *").remove();
             console.log(messageList);
             for(i = 0; i < messageList.length; i++) {
-                nextMessage = $("<div>");
+                tempColor = "#EFFFEF";
+                if(i%2==0) {tempColor = "#EFFFEF";} else {tempColor = "#D5E5D5";}
+                nextMessage = $("<div>").attr({
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "background-color": tempColor
+                });
                 nextMessage.append($("<img>").attr({
                     "src": messageList[i].profileImg,
                     "height": "50px",
