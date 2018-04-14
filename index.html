@@ -332,12 +332,14 @@
                     $('#myModal').modal('hide');
                     username = $("#username")[0].value;
                     password = $("#password")[0].value;
-                    setInterval(getAnnouncements(), 100);
-                    getAllMessages();
-                    events = data.events;
-                    if(events.length>0){
-                    currentEvent = events[0];
-                    } else {currentEvent = '';}
+                    
+                    $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
+                        setInterval(getAnnouncements(), 100);
+                        getAllMessages();
+                        events = userData.events;
+                        if(events.length > 0) {
+                            currentEvent = events[0];
+                        } else {currentEvent = '';}
                 }
                 else {$('#fail').show();}
             });
