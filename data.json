@@ -2,7 +2,7 @@
     "users": {
         "test": {
             "password": "test",
-            "events": ["hackathon"]
+            "events": ["hackathon"],
             "profileImg": "https://cdn3.whatculture.com/images/2017/10/8e4b1164f05be363-600x400.jpg"
             }
         },
