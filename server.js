@@ -17,6 +17,12 @@ app.post("/index.html", function(req, res) {
         if (data.users[b.username] && data.users[b.username].password == b.password) returnData = data.users[b.username];
         else returnData = {"error": "Sent invalid user credential pairing"};
     }
+    else if (b.type == "sendMessage") {
+        data.events[b.event].msgHistory.push({"text": b.message, "user": b.username});
+    }
+    else if (b.type == "getAllMessages") {
+        returnData = data.events[b.event];
+    }
     res.send(returnData);
 });
 
