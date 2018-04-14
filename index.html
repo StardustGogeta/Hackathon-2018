@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <style>
         body {
             font-family: "Trebuchet MS";
+            overflow-y: hidden;
+            overflow-x: hidden;
         }
         
         #toolbar {
@@ -13,6 +15,8 @@
             height: 12vh;
             background-color: lightsteelblue;
             color: white;
+            display: flex;
+            flex-direction: row;
         }
         
         #title-text {
@@ -20,6 +24,27 @@
             padding-top: 20px;
             font-size: 50px;
             text-shadow: 3px 3px 5px black;
+            flex-grow: 3;
+        }
+        
+        #event-text {
+            padding-left: 30px;
+            padding-top: 20px;
+            font-size: 50px;
+            text-shadow: 3px 3px 5px black;
+            flex-grow: 3;
+        }
+        
+        #event-button {
+            font-size: 50px;
+            text-shadow: 3px 3px 5px black;
+            flex-grow: 1;
+        }
+        
+        #settings-button {
+            font-size: 50px;
+            text-shadow: 3px 3px 5px black;
+            flex-grow: 3;
         }
         
         #body {
@@ -51,7 +76,10 @@
 </head>
 <body>
     <div id="toolbar">
-        <h1 id="title-text">EHost Planner</h1>
+        <button id="event-button">=</button>
+        <h1 id="title-text">EHost Planner:</h1>
+        <h1 id="event-text">Hackathon</h1>
+        <button id="settings-button">Stuff</button>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -73,12 +101,17 @@
         </div>
     </div>
     <script>
+        username = '';
+        password = '';
+        events = [];
+        currentEvent = '';
+        
         chatBoxLog = document.getElementById('chat-box-log');
         chatBoxMessage = document.getElementById('chat-box-log');
         
         function sendMessage() {
             inputBox = document.getElementById('chat-box-message-text');
-            $.post("index.html", {"type": "sendMessage", "username": 'test', "event": "hackathon", "message": inputBox.value}, function(data){
+            $.post("index.html", {"type": "sendMessage", "username": username, "event": currentEvent, "message": inputBox.value}, function(data){
                 console.log(data);
                 getAllMessages();
                 chatBoxRefresh();
@@ -88,7 +121,7 @@
         
         messageList = [];
         function getAllMessages() {
-            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
+            $.post("index.html", {"type": "getAllMessages", "event": currentEvent}, function(data){
                 messageList = data;
                 chatBoxRefresh();
                 setInterval(getMessage(), 100);
@@ -96,7 +129,7 @@
         }
         
         function getMessage() {
-            $.post("index.html", {"type": "getAllMessages", "event": "hackathon"}, function(data){
+            $.post("index.html", {"type": "getAllMessages", "event": currentEvent}, function(data){
                 messageList = data;
                 chatBoxRefresh();
             });
@@ -116,6 +149,32 @@
                 $("#chat-box-log").append(nextMessage);
                 console.log(messageList[i]);
             }
+        }
+        
+        function getUserData(success, failure) {
+            $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(data) {
+                if(data.err == 'true'){
+                   success();
+                } else {
+                   failure();
+                }
+            });
+        }
+        
+        function changeEvent(newEvent) {
+            currentEvent = newEvent;
+            $("#event-text").text(currentEvent);
+        }
+        
+        function logIn() {
+            getUserData(successfulLogIn, logIn);    
+        }
+        
+        function successfulLogIn(data) {
+            events = data.events;
+            if(events.length>0){
+            currentEvent = events[0];
+            } else {currentEvent = '';}
         }
         
         //Main Functions
