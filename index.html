@@ -109,6 +109,34 @@
         #announcements {
             flex-grow: 3;
             background-color: #42AB42;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #can-go-button {
+            background-color: #42AB42;
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+            color: white;
+            text-shadow: 3px 3px 5px #026B02;
+        }
+        
+        #cant-go-button {
+            background-color: #42AB42;
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+            color: white;
+            text-shadow: 3px 3px 5px #026B02;
+        }
+        
+        #can-go-button:hover {
+            background-color: #127B12;
+        }
+        
+        #cant-go-button:hover {
+            background-color: #127B12;
         }
         
         #chat-box-message-text {
@@ -188,7 +216,10 @@
                         <textarea id="chat-box-message-text" type="text" style="flex: 2; flex-grow: 5"></textarea>
                     </div>
                 </div>
-                <div id="announcements">hi</div>
+                <div id="announcements">
+                    <button id="can-go-button">I can go!</button>
+                    <button id="cant-go-button">I can't go.</button>
+                </div>
             </div>
         </div>
     </div>
