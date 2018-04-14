@@ -25,7 +25,7 @@ app.post("/index.html", function(req, res) {
     }
     else if (b.type == "addEvent") {
         if (!data.events[b.event]) {
-            data.users[b.username].events.push("b.event");
+            data.users[b.username].events.push(b.event);
             data.events[b.event] = {"msgHistory": [], "going": [], "notGoing": []};
             jsonfile.writeFileSync("data.json", data);
         }
@@ -39,6 +39,8 @@ app.post("/index.html", function(req, res) {
     else if (b.type == "signup") {
         if (!data.users[b.username]) {
             data.users[b.username] = {"password": b.password, "events": [], "profileImg": b.profileImg};
+            jsonfile.writeFileSync("data.json", data);
+            // console.log("PLEASE", data.users);
         }
     }
     res.send(returnData);
