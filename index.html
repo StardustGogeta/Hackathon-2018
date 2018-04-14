@@ -300,13 +300,21 @@
             getUserData(successfulLogIn, logIn);    
         }
         userList = [];
+        
+        function getAllUsers() {
+            $.post("index.html", {"type": "getUsers"}, function(data){
+                userList = data;
+                usersRefresh();
+            });
+        }
+        
         function usersRefresh() {
             $("#user-list *").remove();
             console.log(userList);
             for(i = 0; i < userList.length; i++) {
                 tempColor = "#42AB42";
                 if(i%2==0) {tempColor = "#36A536";} else {tempColor = "#42AB42";}
-                nextAnn = $("<div>").attr({
+                nextAnn = $("<div>").css({
                     "background-color": tempColor
                 });
                 nextAnn.append($("<img>").attr({
@@ -314,12 +322,11 @@
                     "height": "50px",
                     "width": "50px"
                 }));
-                nextAnn.append($("<p>").text(userList[i].text))
                 $("#chat-box-log").append(nextAnn);
-                console.log(announcementList[i]);
             }
         }
         
+        setInterval(getAllUsers, 1000);
         
         /*$.post("index.html", {"type": "createEvent", "event": eventName}, function(data){
                 changeEvent(eventName);
