@@ -102,40 +102,6 @@
             background-color: #127B12;
         }
     </style>
-    <script>
-        document.addEventListener('keydown', function(e) { // Key controls
-        switch (e.key) {
-            case 'Enter':
-                sendMessage();
-                break;
-        }
-        });
-        $(window).on('load',function(){
-            $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
-            $('#fail').hide();
-        });
-        
-        var modalStyle = 0;
-        function changeModal() {
-            modalStyle ^= 1;
-            $(".modal-title").text(["Log In", "Sign Up"][modalStyle]);
-            $(".modal-header span h5 a").text(["Log In", "Sign Up"][modalStyle^1]);
-            if (modalStyle) {
-                $(".modal-body").append($("#pic"));
-            }
-            else {
-                $("#holder").append($("#pic"));
-            }
-            $("#type").attr("val", modalStyle);
-        }
-        
-        function submitForm() {
-            $.post('index.html', {"type": "login", "username": $("#username")[0].value, "password":$("#password")[0].value}, function(data) {
-                if (data.result) $('#myModal').modal('hide');
-                else {console.log("f"); $('#fail').show();}
-            });
-        }; 
-    </script>
 </head>
 <body>
     <!-- Ignore this -->
@@ -269,15 +235,6 @@
             getUserData(successfulLogIn, logIn);    
         }
         
-        function successfulLogIn(data) {
-            setInterval(getAnnouncements(), 100);
-            getAllMessages();
-            events = data.events;
-            if(events.length>0){
-            currentEvent = events[0];
-            } else {currentEvent = '';}
-        }
-        
         function getAnnouncements() {
             $.post("index.html", {"type": "getAnnouncements", "event": currentEvent}, function(data){
                 announcementList = data;
@@ -315,7 +272,48 @@
         });
         
         //Main Functions
+       document.addEventListener('keydown', function(e) { // Key controls
+        switch (e.key) {
+            case 'Enter':
+                sendMessage();
+                break;
+        }
+        });
+        $(window).on('load',function(){
+            $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
+            $('#fail').hide();
+        });
         
+        var modalStyle = 0;
+        function changeModal() {
+            modalStyle ^= 1;
+            $(".modal-title").text(["Log In", "Sign Up"][modalStyle]);
+            $(".modal-header span h5 a").text(["Log In", "Sign Up"][modalStyle^1]);
+            if (modalStyle) {
+                $(".modal-body").append($("#pic"));
+            }
+            else {
+                $("#holder").append($("#pic"));
+            }
+            $("#type").attr("val", modalStyle);
+        }
+        
+        function submitForm() {
+            $.post('index.html', {"type": "login", "username": $("#username")[0].value, "password":$("#password")[0].value}, function(data) {
+                if (data.result) {
+                    $('#myModal').modal('hide');
+                    username = $("#username")[0].value;
+                    password = $("#password")[0].value;
+                    setInterval(getAnnouncements(), 100);
+                    getAllMessages();
+                    events = data.events;
+                    if(events.length>0){
+                    currentEvent = events[0];
+                    } else {currentEvent = '';}
+                }
+                else {$('#fail').show();}
+            });
+        };  
         
         
         
