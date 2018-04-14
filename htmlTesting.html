@@ -50,8 +50,9 @@
         function chatBoxRefresh() {
             $("#chat-box-log *").remove();
             for(i = 0; i < messageList.length; i++) {
-                nextMessage = $("<div>").text(messageList[i]);
-                $("#chat-box-log").append();
+                nextMessage = $("<div>");
+                nextMessage.append($("<p>").text(messageList[i].text))
+                $("#chat-box-log").append(nextMessage);
             }
         }
         
