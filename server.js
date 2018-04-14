@@ -19,8 +19,7 @@ app.post("/index.html", function(req, res) {
     }
     else if (b.type == "sendMessage") {
         if (data.events[b.event]) {
-            data.events[b.event].msgHistory.push({"text": b.message, "user": b.username});
-            console.log("new", data);
+            data.events[b.event].msgHistory.push({"text": b.message, "user": b.username, "profileImg": data.users[b.username].profileImg});
             jsonfile.writeFileSync("data.json", data);
         }
     }
