@@ -263,10 +263,8 @@
             console.log(messageList);
             for(i = 0; i < messageList.length; i++) {
                 tempColor = "#EFFFEF";
-                if(i%2==0) {tempColor = "#EFFFEF";} else {tempColor = "#D5E5D5";}
-                nextMessage = $("<div>").attr({
-                    "display": "flex",
-                    "flex-direction": "row",
+                if(i%2 ==0) {tempColor = "#EFFFEF";} else {tempColor = "#D5E5D5";}
+                nextMessage = $("<div>").css({
                     "background-color": tempColor
                 });
                 nextMessage.append($("<img>").attr({
@@ -299,27 +297,34 @@
         function logIn() {
             getUserData(successfulLogIn, logIn);    
         }
-        userList = [];
+        /*userList = [];
+        
+        function getAllUsers() {
+            $.post("index.html", {"type": "getUsers"}, function(data){
+                userList = data;
+                usersRefresh();
+            });
+        }
+        
         function usersRefresh() {
             $("#user-list *").remove();
             console.log(userList);
             for(i = 0; i < userList.length; i++) {
                 tempColor = "#42AB42";
                 if(i%2==0) {tempColor = "#36A536";} else {tempColor = "#42AB42";}
-                nextAnn = $("<div>").attr({
+                nextAnn = $("<div>").css({
                     "background-color": tempColor
                 });
                 nextAnn.append($("<img>").attr({
-                    "src": userList[i].profileImg,
+                    "src": userList.imgs[i],
                     "height": "50px",
                     "width": "50px"
                 }));
-                nextAnn.append($("<p>").text(userList[i].text))
                 $("#chat-box-log").append(nextAnn);
-                console.log(announcementList[i]);
             }
         }
         
+        setInterval(getAllUsers, 1000);*/
         
         /*$.post("index.html", {"type": "createEvent", "event": eventName}, function(data){
                 changeEvent(eventName);
@@ -364,7 +369,7 @@
                     password = $("#password")[0].value;
                     
                     $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
-                        setInterval(getAllMessages(), 100);
+                        setInterval(getAllMessages, 1000);
                         events = userData.events;
                         if(events.length > 0) {
                             currentEvent = events[0];
@@ -379,7 +384,7 @@
                 password = $("#password")[0].value;
                 
                 $.post("index.html", {"type": "getUserData", "username": username, "password": password}, function(userData) {
-                    setInterval(getAllMessages(), 100);
+                    setInterval(getAllMessages, 1000);
                     events = userData.events;
                     if(events.length > 0) {
                         currentEvent = events[0];
@@ -394,7 +399,6 @@
                 changeEvent(eventName);
             });
         }
-        
         
     </script>
 </body>
